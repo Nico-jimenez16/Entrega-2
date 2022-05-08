@@ -23,13 +23,13 @@ Vue.component('my-header', {
 });
 
 
-Vue.component('products', {
+Vue.component('my-tabla', {
     template: /* html */ `    
         <div class="mb-8">
             <h1 class="flex w-full justify-center items-center text-3xl p-4">{{ tabla.title }}</h1>
             <div>
-                <table class="w-full table-auto">
-                    <thead class="bg-black text-white">
+                <table class="w-full table-auto text-xl">
+                    <thead class="h-full bg-black text-white p-8">
                         <tr>
                             <th v-for="(head, i) of tabla.headtable" :key="i" scope="col">{{head}}</th>
                         </tr>
@@ -37,12 +37,18 @@ Vue.component('products', {
 
                     <!-- Tabla de Productos -->
 
-                    <tbody class="bg-yellow-300 text-2xl">
-                        <tr v-for="(producto, index) of tabla.productos" :key="index">
-                            <td>{{index}}</td>
-                            <td><img class="w-1/5 h-32" :src="producto.url"></td>
+                    <tbody class="flex-inline text-2xl" :class="[tabla.fondo]">
+                        <tr v-if="tabla.productos" v-for="(producto, index) of tabla.productos" :key="index">
+                            <td>{{index + 1}}</td>
+                            <td><img class="w-1/2 m-auto" :src="producto.url"></td>
                             <td>{{producto.descripcion}}</td>
                             <td>$ {{producto.precio}}</td>
+                        </tr>
+                        <tr v-if="tabla.usuarios" v-for="(usuario, index) of tabla.usuarios" :key="index">
+                            <td>{{index + 1}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.apellido}}</td>
+                            <td>{{usuario.edad}}</td>
                         </tr>
                     </tbody>
                     
@@ -64,7 +70,7 @@ const app = new Vue ({
     el: '#app',
     data() {
         return {
-            titulo: 'Hola , soy Nicolas Jimenez',
+            titulo: 'Name : Angel Nicolas Jimenez',
             entrega: 'Esta es la Segunda entrega - Componentes con VueJs',
             one: {
                 tabla: {
@@ -87,13 +93,14 @@ const app = new Vue ({
                             descripcion: 'Hamburguesa triple',
                             precio: 300
                         }
-                    ]
+                    ],
+                    fondo: 'bg-yellow-300'
                 }
             },
             two: {
                 tabla: {
-                    title: 'Tabla de datos con Componentes - Usuarios',
-                    headtable: ['Index', 'Nombre', 'Apellido', 'Edad'],
+                    title: 'Tabla de datos con Componentes - Autos',
+                    headtable: ['Index', 'Imagen', 'Descripcion', 'Precio'],
                     productos: [
                         {
                             url: './image/audi.jpg',
@@ -110,7 +117,32 @@ const app = new Vue ({
                             descripcion: 'Audi A5',
                             precio: 78000
                         }
-                    ]
+                    ],
+                    fondo: 'bg-orange-300'
+                }
+            },
+            tree: {
+                tabla: {
+                    title: 'Tabla de datos con Componentes - Usuarios',
+                    headtable: ['Index', 'Nombre', 'Apellido', 'Edad'],
+                    usuarios: [
+                        {
+                            nombre: 'Felipe',
+                            apellido: 'Jimenez',
+                            edad: 58
+                        },
+                        {
+                            nombre: 'Andres',
+                            apellido: 'Ramirez',
+                            edad: 35
+                        },
+                        {
+                            nombre: 'Juan',
+                            apellido: 'Rodriguez',
+                            edad: 17
+                        }
+                    ],
+                    fondo: 'bg-lime-300'
                 }
             }
         }

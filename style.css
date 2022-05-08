@@ -1,0 +1,13 @@
+tr{
+    display: flex;
+    height: 100%;
+}
+
+th, td{
+    border: 1px solid;
+    width: 100%;
+    padding: 10px;
+}
+td {
+    text-align: center;
+}
